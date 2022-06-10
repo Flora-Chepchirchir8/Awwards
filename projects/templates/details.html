@@ -1,0 +1,105 @@
+{%extends 'base.html'%} {% load bootstrap5 %} {% block content %} {{ block.super}}
+
+<div class="container-fluid">
+    <div id="random" class="min-vh-75" style="background: #222 url('https://unsplash.it/1920/1080/?random') center center no-repeat;;">
+        <h1>Rate & Get your project rated in terms of:</h1>
+        <ol>
+            <li>
+
+                <div class="title">Design</div>
+                <div class="descr">
+                    An effective website design should fulfil its intended function by conveying its particular message whilst simultaneously engaging the visitor.
+                </div>
+            </li>
+            <li>
+
+                <div class="title">Usability</div>
+                <div class="descr">“Usability” is the user-friendliness of a website determined by how easily visitors are able to interact with it or accomplish what they intended to do.</div>
+            </li>
+            <li>
+
+                <div class="title">Content</div>
+                <div class="descr">
+                    Image result for rating web project in terms of content Web content refers to the textual, aural, or visual content published on a website. Content means any creative element</div>
+            </li>
+
+
+        </ol>
+    </div>
+
+    <!-- Looping through projects   -->
+    <div class="row project">
+        <div class="col-md-2"></div>
+        <!-- displaying projects projects -->
+        <div class="col-md-8">
+
+            <h2 class="text-success">{{ project.title }}</h2>
+
+
+            <img src="{{project.image.url}}" class="img-thumbnail" alt="Image" onclick="window.open(this.src)">
+            <P>{{ project.description}}</P>
+            <h5>Technologies used</h5>
+            <p>{{project.technologies_used}}</p>
+            <div class="row">
+
+                <div class="col-md-4">
+                    <a href="{{project.link}}">Live Site</a>
+                </div>
+                <div class="col-md-4">
+                    <p>Posted: {{project.pub_date|timesince}} ago</p>
+                </div>
+                <div class="col-md-4">
+                    {% if project.user.username == current_user.username %}
+                    <a href="{% url 'delete-post' project.id %}" class="btn btn-danger">Delete</a> {% endif %}</div>
+            </div>
+
+
+            <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+                Rate Project
+              </button>
+
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Rate Project</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <div>
+                        <form action="" method="post" enctype="multipart/form-data">
+                            {% csrf_token %} {% bootstrap_form rating_form %}
+                            <button class="btn btn-success link">Rate</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <h2>Ratings</h2>
+            <table class="table" border="1">
+                <th>Username</th>
+                <th>Design Rating</th>
+                <th>Usability Rating</th>
+                <th>Content Rating</th>
+                <th>Overal Score</th>
+                {% for rating in all_ratings %}
+                <tr>
+                    <td class="user">{{ rating.user.username }}</td>
+                    <td class="design">{{ rating.design_rating}}</td>
+                    <td class="usability">{{ rating.usability_rating}}</td>
+                    <td class="content">{{ rating.content_rating }}</td>
+                    <td class="average">{{ rating.aggregate_average_rate }}</td>
+
+                </tr>
+
+
+                {% endfor %}
+            </table>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+</div>
+{% endblock %}
