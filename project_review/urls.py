@@ -14,8 +14,36 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
+from projects import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',views.index,name = 'index'),
+    path('projects/',views.projects,name = 'projects'),
+    path('api/profile/', views.ProfileList.as_view()),
+    path('api/projects/', views.ProjectsList.as_view()),
+    path('details/<int:project_id>', views.project_details, name='image'),
+    path('delete_post/<str:pk>/', views.delete_post, name='delete-post'),
+    path('post/',views.post_project,name='post'),
+    path('profile/',views.profile,name="profile" ),
+    path('updateprofile/', views.updateprofile, name='updateprofile'),
+    path('search/',views.search,name='search'),
+    path('accounts/', include('django_registration.backends.one_step.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('update_project/<str:pk>/', views.update_project, name='updateproject'),
+    path('logout/', views.logout_user, name='logout'),
+    
+
+
+    
+
 ]
+
+
+#serve uploaded images on the development server 
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
