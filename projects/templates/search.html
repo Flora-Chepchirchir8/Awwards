@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row text-center">
+    {% if projects%}
+    <h1>Found {{ projects|length }} of searched term {{message}}</h1>
+    {% else %}
+    <h1> Found 0 projects for the search term {{message}}</h1>
+    {% endif %}
+
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="row">
+                {% if projects %} {% for project in projects %}
+                <div class="col-md-3 col-sm-4 project">
+                    <div class="open-project">
+                        <a href="{% url 'project.detail' project.id %}"><img src="{{project.project_image.url}}" alt="" class="img-thumbnail project-img"></a>
+                    </div>
+                    <div class="details">
+                        <div class="row">
+                            <div class="col-md-7">
+                                <p class="title">{{project.title}}</p>
+                            </div>
+                            <div class="col-md-5">
+                                <p>{{project.post_date|date}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <p class="name">By <a class="username" style="margin-top: 5px;" href="{% url 'users_profile' project.user.id %}">{{project.user.username}}</a></p>
+                            </div>
+                            <div class="col-md-4">
+                                {% if project.user.profile.image.url %}
+                                <p>
+                                    <a href="{% url 'users_profile' project.user.id %}"><img class="profile_picture" src="{{ project.user.profile.image.url }}" alt="{{ project.profile.name }}"></a>
+                                </p>
+                                {% else %}
+                                <i style="font-size:30px;color:#4888BE" class="fa fa-user" aria-hidden="true"></i> {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %} {% endif %}
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+
+
+{% endblock %}
