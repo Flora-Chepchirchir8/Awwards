@@ -1,0 +1,39 @@
+{%extends "base.html"%} {% load bootstrap5 %} {% load static %} {% block styles %} {% bootstrap_css %}
+<link rel="stylesheet" href="{% static 'css/projects.css' %}"> {% endblock %} {% block content%}
+<div class="container">
+
+    <div style="margin-top: 122px;" class="container">
+
+        <div class=" row">
+            {% for photo in profile %}
+            <p class="">{{projects|length}} posts</p>
+            <div class="col-md-4">
+                <p>{{ user }}</p>
+                <a href="{%url 'updateprofile'%}"> <button class="button">Edit Profile</button> </a>
+                <p>{{photo.bio}}</p>
+
+
+                <b>{{photo.contact}}</b>
+
+            </div>
+            <div class="col-md-4">
+
+                <img src="{{ photo.image.url}}" class="img-fluid img-thumbnail rounded-circle" style="width: 150px;" alt="Avatar" />
+            </div>
+
+            {% endfor %}
+        </div>
+        <hr>
+
+
+
+
+
+    </div>
+    <div class="contain">
+        {% for img in image %}
+        <img src="{{img.image.url}}" alt="" srcset="" style="width:14rem ; height:9rem;" class="my-1"> {% endfor %}
+        <a href="{%url 'updateprofile'%}"> <button class="button">Edit Profile</button> </a>
+    </div>
+
+    {% endblock %}
