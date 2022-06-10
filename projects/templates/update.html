@@ -1,0 +1,11 @@
+ {% extends 'base.html' %} {% load bootstrap5 %} {% load static %} {% block content %} {{block.super}}
+
+<div class=" post " style="margin-top: 123px;">
+    <h4 class="my-4">UPDATE PROFILE</h4>
+    <form action="{%url 'updateprofile'%}" method="post" enctype="multipart/form-data" class="m-4">
+        {% csrf_token %} {% bootstrap_form profileform %}
+        <input type="submit" class="btn btn-primary btn-sm mb-4" value="Update Profile">
+    </form>
+</div>
+
+{% endblock %}
