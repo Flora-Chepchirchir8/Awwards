@@ -9,7 +9,7 @@ import datetime as dt
 
 class Profile  (models.Model):
     bio = models.CharField(max_length=250)
-    # image = CloudinaryField('image/', default="")
+    image = models.ImageField(upload_to = 'profile/')
     contact = models.CharField(max_length=10,blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     def __str__(self):
@@ -29,7 +29,7 @@ class Profile  (models.Model):
 
 class Projects (models.Model):
     title = models.CharField(max_length=60)
-    # image = CloudinaryField('image/', default="")
+    project_image = models.ImageField(upload_to ='projects/')
     description = models.TextField()
     location = models.CharField(max_length=50, blank=True)
     technologies_used =models.TextField()

@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'projects.apps.ProjectsConfig',
     'bootstrap4',
- 
     'rest_framework',
 
 ]
@@ -84,9 +83,9 @@ WSGI_APPLICATION = 'project_review.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'chiri',
+        'NAME': 'kiptoo',
         'USER': 'moringa',
-        'PASSWORD':'felix',
+        'PASSWORD':'kiptoo',
     }
 }
 # adding config

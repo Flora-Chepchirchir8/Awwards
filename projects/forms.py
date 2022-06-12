@@ -9,10 +9,10 @@ class RatingsForm(forms.ModelForm):
         model = Rating
         fields = ['design_rating', 'usability_rating', 'content_rating']
 
-class ProjectsPostForm(forms.ModelForm):
+class ProjectsForm(forms.ModelForm):
     class Meta:
        model = Projects
-       fields = ['title', 'image', 'user','description','link','technologies_used','location']
+       fields = ['title', 'project_image', 'user','description','link','technologies_used','location']
 
 
 class ProfileForm(forms.ModelForm):

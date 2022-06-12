@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.core.exceptions import ObjectDoesNotExist
-from .forms import  RatingsForm, ProjectsPostForm,ProfileForm
+from .forms import *
 from django.http.response import HttpResponseRedirect
 from rest_framework.response import Response
 from django.contrib.auth import authenticate, login, logout
@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from rest_framework import status
-from .models import Profile,Projects,Rating
+from .models import *
 from django.contrib.auth.models import User
 from .serializer import ProfileSerializer,ProjectsSerializer
 
@@ -91,7 +91,7 @@ def delete_post(request, pk):
 def post_project(request):
     current_user = request.user
     if request.method == 'POST':
-        form =ProjectsPostForm(request.POST, request.FILES)
+        form =ProjectsForm(request.POST, request.FILES)
         if form.is_valid():
             projects = form.save(commit=False)
             projects.editor = current_user
@@ -99,7 +99,7 @@ def post_project(request):
         return redirect('projects')
     
     else:
-        form =ProjectsPostForm()
+        form =ProjectsForm()
     return render(request, 'post_project.html', {"form": form})
 @login_required(login_url='/accounts/login/')    
 def profile(request):
@@ -134,14 +134,14 @@ def search(request):
 @login_required(login_url='login')
 def update_project(request, pk):
     post = Projects.objects.get(id=pk)
-    form = ProjectsPostForm(instance=post)
+    form = ProjectsForm(instance=post)
 
     if request.user != post.user:
         messages.error(request, 'You are not the author of the post!')
         return redirect('projects')
 
     if request.method == 'POST':
-        form = ProjectsPostForm(request.POST, instance=post)
+        form = ProjectsForm(request.POST, instance=post)
         if form.is_valid():
             print(request.POST)
             image = form.save(commit=False)
