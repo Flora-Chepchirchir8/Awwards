@@ -74,6 +74,7 @@ def project_details(request, project_id):
    else:
        form = RatingsForm()
    return render(request, 'details.html', {'current_user':current_user,'all_ratings':all_ratings,'project':project,'rating_form': form,'rating_status': rating_status})
+   
 @login_required(login_url='/accounts/login/')
 def delete_post(request, pk):
     post = Projects.objects.get(id=pk)
@@ -118,7 +119,7 @@ def updateprofile(request):
         return redirect('profile')
     else:
         profileform= ProfileForm()
-    return render(request, 'update.html', {'profileform': profileform})
+    return render(request, 'update_profile.html', {'profileform': profileform})
 
 @login_required(login_url='/accounts/login/')
 def search(request):
