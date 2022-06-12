@@ -1,7 +1,7 @@
 {%extends 'base.html'%} {% load bootstrap4 %} {% block content %} {{ block.super}}
 
 <div class="container-fluid">
-    <div id="random" class="min-vh-75" style="background: #222 url('https://unsplash.it/1920/1080/?random') center center no-repeat;;">
+    <div id="random" class="min-vh-75" style="background: black center center no-repeat;;">
         <h1>Rate & Get your project rated in terms of:</h1>
         <ol>
             <li>
@@ -36,7 +36,7 @@
             <h2 class="text-success">{{ project.title }}</h2>
 
 
-            <img src="{{project.image.url}}" class="img-thumbnail" alt="Image" onclick="window.open(this.src)">
+            <img src="{{project.project_image.url}}" class="img-thumbnail" alt="Image" onclick="window.open(this.src)">
             <P>{{ project.description}}</P>
             <h5>Technologies used</h5>
             <p>{{project.technologies_used}}</p>
