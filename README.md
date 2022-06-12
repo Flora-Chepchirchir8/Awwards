@@ -1,5 +1,5 @@
 # Awwards
-![Awwards](/static/image/chirry.png)
+![Awwards](/static/image/felix.png)
 
 This is a website application that users can view projects posted and rate them according to design, usability and content. Users can also be able to add their own projects to be rated by others on registering an account and logging in.
 
