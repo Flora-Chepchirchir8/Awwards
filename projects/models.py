@@ -47,10 +47,10 @@ class Projects (models.Model):
     def delete_project(self):
         self.delete()
 
-    @classmethod
-    def search_by_title(cls, title):
-        image= cls.objects.filter(title__title__icontains=title)
-        return image
+    # @classmethod
+    # def search_by_title(cls, title):
+    #     image= cls.objects.filter(title__title__icontains=title)
+    #     return image
 
     @classmethod
     def get_projects(cls):
